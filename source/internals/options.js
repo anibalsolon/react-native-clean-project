@@ -70,6 +70,7 @@ const askFull = () =>
       updatePods = true;
       return reject();
     }
+    return resolve();
   });
 
 const askiOS = () =>

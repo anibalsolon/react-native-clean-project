@@ -4,14 +4,16 @@ const { executeTask } = require('./internals/executor');
 const { tasks } = require('./internals/tasks');
 
 options
-  .askiOS()
+  .askFull()
+  .then(options.askiOS)
   .then(options.askiOSPods)
   .then(options.askUpdatePods)
   .then(options.askAndroid)
   .then(options.askAndroidCleanProject)
   .then(options.askNodeModules)
   .then(options.askBrew)
-  .then(() => {
+  .catch(() => console.log("Wiping out everything."))
+  .finally(() => {
     options.rlInterface.close();
     if (options.getWipeiOSBuild()) {
       executeTask(tasks.wipeiOSBuildFolder);

@@ -58,6 +58,20 @@ const checkAnswer = (answer, questionFunction, resolve) => {
   return false;
 };
 
+const askFull = () =>
+  new Promise((resolve, reject) => {
+    if (args.includes('--full')) {
+      cleanAndroidProject = true;
+      wipeiOSBuild = true;
+      wipeiOSPods = true;
+      wipeAndroidBuild = true;
+      wipeNodeModules = true;
+      updateBrew = true;
+      updatePods = true;
+      return reject();
+    }
+  });
+
 const askiOS = () =>
   new Promise(resolve => {
     if (args.includes('--remove-iOS-build')) {
@@ -143,6 +157,7 @@ module.exports = {
   getWipeNodeModules,
   getUpdateBrew,
   getUpdatePods,
+  askFull,
   askiOS,
   askiOSPods,
   askUpdatePods,
